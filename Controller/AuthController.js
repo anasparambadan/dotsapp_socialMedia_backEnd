@@ -5,6 +5,7 @@ import otpVerificationModel from "../Models/otpVerificationModel.js";
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
 
+
 dotenv.config()
 //sign up user
 export const registerUser = async (req, res) => {
@@ -55,7 +56,7 @@ export const loginUser = async (req, res) => {
 
             if (!validity) {
                 {
-                    res.status(400).json("Either password or user name is incorrect")
+                    res.status(200).json({message:"Password incorrect",success:false})
                 }
             }
             else {
@@ -63,11 +64,11 @@ export const loginUser = async (req, res) => {
                     username: user.userName, id: user._id
                 }, process.env.JWT_KEY, { expiresIn: '1h' })
                 
-                res.status(200).json({ user, token })
+                res.status(200).json({ user, token,success:true,message:"Login Success" })
             }
         }
         else {
-            res.status(404).json("User does not exist")
+            res.status(200).json({message:"User does not exist",success:false})
         }
     } catch (error) {
         res.status(500).json({ message: error.message })

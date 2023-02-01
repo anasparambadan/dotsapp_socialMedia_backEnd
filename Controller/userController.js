@@ -9,7 +9,7 @@ export const getAllUsers = async (req, res) => {
 
 
     try {
-        let users = await UserModel.find();
+        let users = await UserModel.find({isAdmin:false});
 
         users = users.map((user) => {
             const { password, ...otherDetails } = user._doc
@@ -52,7 +52,7 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const id = req.params.id;
-    const { _id, currentUserAdminStatus, password } = req.body;
+    const { _id, password } = req.body;
 
     if (id === _id) {
         try {
@@ -181,12 +181,11 @@ export const searchUsers = async (req, res) => {
             firstName: { $regex: new RegExp(keyWord), $options: "si" }
         });
         // console.log(findUser,'finduser firest')
-        findUser = findUser.map((item) => {
-            const { password, verified, isAdmin, ...otherDetails } = item._doc
-            return otherDetails;
-        })
-        // console.log(findUser,'find usr at usersearch controller')
-        res.status(200).json(findUser)
+            findUser = findUser.map((item) => {
+                const { password, verified, isAdmin, ...otherDetails } = item._doc
+                return otherDetails;
+            })
+            res.status(200).json(findUser)  
     } catch (error) {
         res.status(500).json(error)
     }

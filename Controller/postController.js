@@ -314,6 +314,7 @@ export const reportPost = async (req, res) => {
 
 export const getReportedPost = async (req, res) => {
     const posts = await ReportModel.find().populate("postId").populate("users.userId")
+    console.log(posts,'posts...........')
 
     try {
         if (posts) {
