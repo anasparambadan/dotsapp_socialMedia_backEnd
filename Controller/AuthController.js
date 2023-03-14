@@ -112,7 +112,7 @@ export const otpVerify = async(req,res)=>{
                         
                         const token = jwt.sign({
                             username: user.userName, id: user._id
-                        }, process.env.JWT_KEY, { expiresIn: '1h' })
+                        }, process.env.JWT_KEY, { expiresIn: '24h' })
                         
                         res.status(200).json({ user, token })
                         
@@ -133,6 +133,7 @@ export const otpVerify = async(req,res)=>{
 export const resendOtp = async(req,res)=>{
     try {
         let{userId,userName} = req.body
+        console.log(userId,userName,'userid and usrname at resend otp authctroller............')
         if(!userId || !userName){
             throw Error("Empty user details")
         }

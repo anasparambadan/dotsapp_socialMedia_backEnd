@@ -6,7 +6,6 @@ export const createChat = async (req, res) => {
   });
     try {
       if(chat){
-        console.log(chat,'chat existis alresdy at chat.contrlooer......')
         res.status(200).json('chat exists')
       }
       else{
