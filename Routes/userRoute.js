@@ -1,6 +1,6 @@
 import express from 'express'
 import { blockUser, deleteUser, followUser, getAllUsers, getUser, searchUsers, unFollowUser, updateUser } from '../Controller/userController.js';
-import authMiddleWare from '../MiddleWare/authMiddleWare.js';
+import authMiddleWare from '../middleWare/authMiddleWare.js';
 
 const router = express.Router();
 
